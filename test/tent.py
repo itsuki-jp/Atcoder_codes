@@ -1,12 +1,19 @@
-import heapq
-
-n = int(input())
-R = list(map(int, input().split()))
-C = list(map(int, input().split()))
-q = int(input())
-for _ in range(q):
-    r, c = map(int, input().split())
-    if R[r - 1] + C[c - 1] > n:
-        print("#", end="")
+def f( x ):
+    if x == 1:
+        return "ok"
+    if x % 2 == 0:
+        return f(x // 2)
     else:
-        print(".", end="")
+        return f(x * 3 + 1)
+
+
+def fib( x ):
+    if x == 1:
+        return 1
+    if x == 2:
+        return 1
+    return fib(x - 1) + fib(x - 2)
+
+
+for _ in range(1, 10):
+    print(fib(_))
