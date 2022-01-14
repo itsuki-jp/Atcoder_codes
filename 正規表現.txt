@@ -1,0 +1,8 @@
+import re
+
+---------- contentsにsearchが含まれてるか判定 ----------
+contents = "abcdefg"
+search = r"d"
+TF = re.search(search,contents)
+
+----------  ----------

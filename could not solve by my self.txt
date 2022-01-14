@@ -1,0 +1,5 @@
+B ABC 051 	: Sum of three integer
+C ABC 052 	: Factors of Factorial
+C ABC 053	: X: Yet Another Die Game (ほぼできた）
+D ABC 053	: Card Eater
+B ABC 054	: Template Matching
