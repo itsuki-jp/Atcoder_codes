@@ -6,3 +6,4 @@ ans = 0
 if ok > 4 or bad == 10:
     exit(print(ans))
 
+# test
