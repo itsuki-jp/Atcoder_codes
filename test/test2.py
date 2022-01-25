@@ -1,25 +1,29 @@
-from itertools import permutations
+import random
 
-
-def main():
-    n = int(input())
-    lst = [[-1 for _ in range(2 * n - 1)] for _ in range(2 * n - 1)]
-    for _ in range(2 * n - 1):
-        a = list(map(int, input().split()))[::-1]
-        for __ in range(len(a)):
-            lst[_][-__ - 1] = a[__]
-    ans = -1
-    for i in permutations(range(2 * n)):
-        temp = 0
-        for j in range(n):
-            x, y = i[2 * j], i[2 * j + 1]
-            if not x > y:
-                x, y = y, x
-            temp ^= lst[y][x - 1]
-        if temp > ans:
-            ans = temp
-    print(ans)
-
-
-if __name__ == '__main__':
-    main()
+words = [["エキスパートシステム", "専門家が持つ知識を収納することで彼らと同等、以上の能力を持つシステム"],
+         ["悪構造問題", "厳密が解法がなく、定式化されていない"],
+         ["良構造問題", "明確な解法がある"],
+         ["WM", "問題の状態を表す"],
+         ["PM", "ルールを収納している"],
+         ["PSI", "WMに当てはまるPMを見つけ、WMを更新する"],
+         ["前向き推論", "状況に応じて行動を変化させる"],
+         ["後向き推論", "仮説を証明していく"],
+         ["メタ知識", "推論を制御する知識"],
+         ["モジュール性", ["規則動詞が互いに直接呼び合わない", "システムの能力を段階的に増大できる"]],
+         ["可読性", "PM内のルールは一定の完結した知識"],
+         ["自己説明性", "ブラックボックス化を防ぐ"],
+         ["効率性", "悪い"],
+         ["データ", "未処理"],
+         ["情報", "データに意味を与えたもの"],
+         ["知識", "行動を起こすための指針"],
+         ["ドメイン知識", "問題解決の対象領域に関する知識"],
+         ["タスク知識", "問題解決に関する知識"],
+         ["Socialization", "個別の暗黙知をグループの暗黙知へ"],
+         ["Externalization", "暗黙知を言語化することで、形式知に"],
+         ["Combination", "形式知を組み合わせ、体系的な形式知へ"],
+         ["Internalization", "追体験などにより、形式知を暗黙知へ"]]
+random.shuffle(words)
+for q in words:
+    print(q[0])
+    user_input = input()
+    print(q[1])
