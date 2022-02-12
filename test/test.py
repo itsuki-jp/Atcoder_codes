@@ -13,3 +13,4 @@ for n in range(1, 20):
         else:
             ans = past + (1 + n - past_nine) * (n - past_nine) / 2
             print(int(ans) % mod)
+print("gue-")
