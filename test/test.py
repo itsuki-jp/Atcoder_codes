@@ -154,7 +154,7 @@ for _ in range(q):
         else:
             print(-1)
     else:
-        if 0 <= pos + k - 1 < len(s):
+        if len(s) - pos >= k:
             print(s[pos + k - 1])
         else:
             print(-1)
