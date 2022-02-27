@@ -1,3 +1,4 @@
+# 解説AC
 n, k = map(int, input().split())
 a = list(map(int, input().split()))
 x = 0
