@@ -17,7 +17,10 @@ def main():
     for _ in range(q):
         t, k = map(int, input().split())
         k -= 1
-        origin = k // pow(2, t)
+        if t >= 60:
+            origin = 0
+        else:
+            origin = k // pow(2, t)
         chara = s[origin]
         pos = k % pow(2, t)
         ans = solve(chara, pos, t)
