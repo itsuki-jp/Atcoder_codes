@@ -1,31 +1,23 @@
-def solve( chara, pos, t ):
-    rule = {"A": "BC", "B": "CA", "C": "AB"}
-    for i in range(t):
-        mid = pow(2, t - 2 - i)
-        chara = rule[chara]
-        if mid < pos:
-            chara = chara[1]
-            pos -= mid
-        else:
-            chara = chara[0]
-    return chara
+import sys
 
 
-def main():
-    s = input()
-    q = int(input())
-    for _ in range(q):
-        t, k = map(int, input().split())
-        k -= 1
-        if t >= 60:
-            origin = 0
-        else:
-            origin = k // pow(2, t)
-        chara = s[origin]
-        pos = k % pow(2, t)
-        ans = solve(chara, pos, t)
-        print(ans)
+def solve( t, k ):
+    c = {"A": "ABC", "B": "BCA", "C": "CAB"}
+    if t == 0:
+        return s[k]
+    if k == 0:
+        return c[s[0]][t % 3]
+    char = solve(t - 1, k // 2)
+
+    if k % 2 == 1:
+        return c[char][2]
+    else:
+        return c[char][1]
 
 
-if __name__ == '__main__':
-    main()
+input = sys.stdin.readline
+s = input()
+q = int(input())
+for _ in range(q):
+    T, K = map(int, input().split())
+    print(solve(T, K - 1))
