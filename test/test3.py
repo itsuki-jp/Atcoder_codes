@@ -3,7 +3,7 @@ n = int(input())
 lst = [2, 3, 3, 3, 3, 3, 3, 3, 2]
 if n == 2:
     exit(print(25))
-
+# 1179ms
 for i in range(n - 2):
     n_lst = [0 for _ in range(9)]
     n_lst[0] = lst[0] + lst[1]
