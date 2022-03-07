@@ -1,36 +1,28 @@
 from sys import setrecursionlimit
 
 
-def solve( pos ):
+def solve( now, prv=-1 ):
     global cnt
-    if visited[pos]:
-        return ans[pos]
-    visited[pos] = True
-    if pos != 0 and len(graph[pos]) == 1:
-        ans[pos] = [cnt, cnt]
+    l[now] = cnt
+    for nxt in graph[now]:
+        if nxt == prv:
+            continue
+        solve(nxt, now)
+    if (len(graph[now])) == 1 and prv != -1:
         cnt += 1
-        return ans[pos]
-    big, small = -1, 10 ** 10
-    for nxt in graph[pos]:
-        if not visited[nxt]:
-            temp = solve(nxt)
-            big = max(big, temp[1])
-            small = min(small, temp[0])
-    ans[pos] = [small, big]
-    return ans[pos]
+    r[now] = cnt - 1
 
 
 setrecursionlimit(10 ** 6)
 n = int(input())
-ans = [[] for _ in range(n)]
 graph = [[] for _ in range(n)]
 for _ in range(n - 1):
-    u, v = map(int, input().split())
-    graph[u - 1].append(v - 1)
-    graph[v - 1].append(u - 1)
-visited = [False for _ in range(n)]
+    ut, vt = map(int, input().split())
+    graph[ut - 1].append(vt - 1)
+    graph[vt - 1].append(ut - 1)
 cnt = 1
+r = [0] * n
+l = [0] * n
 solve(0)
-ans[0] = [1, cnt - 1]
-for _ in ans:
-    print(*_, sep=" ")
+for _ in range(n):
+    print(l[_], r[_])
