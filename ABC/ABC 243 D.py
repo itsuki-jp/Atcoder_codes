@@ -1,3 +1,4 @@
+# 解説AC
 n, x = map(int, input().split())
 s = input()
 b = list(bin(x)[2:])
