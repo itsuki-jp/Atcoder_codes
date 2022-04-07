@@ -1,28 +1,14 @@
-def solve( chara, pos, t ):
-    rule = {"A": "BC", "B": "CA", "C": "AB"}
-    for i in range(t):
-        mid = pow(2, t - 2 - i)
-        chara = rule[chara]
-        if mid < pos:
-            chara = chara[1]
-            pos -= mid
-        else:
-            chara = chara[0]
-    return chara
-
-
-def main():
-    s = input()
-    q = int(input())
-    for _ in range(q):
-        t, k = map(int, input().split())
-        k -= 1
-        origin = k // pow(2, t)
-        chara = s[origin]
-        pos = k % pow(2, t)
-        ans = solve(chara, pos, t)
-        print(ans)
-
-
-if __name__ == '__main__':
-    main()
+n, k, x = map(int, input().split())
+a = list(map(int, input().split()))
+t_k = 0
+for i in range(n):
+    t_k += a[i] // x
+    a[i] %= x
+ans = sum(a)
+if t_k >= k:
+    ans += (t_k - k) * x
+else:
+    a.sort()
+    for j in range(min((k - t_k), n)):
+        ans -= a[-j - 1]
+print(ans)
