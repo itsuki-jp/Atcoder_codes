@@ -22,7 +22,7 @@ def factorization( n ):
     return arr
 
 
-print(factorization(24))
+print(factorization(3))
 
 ## [[2, 3], [3, 1]]
 ##  24 = 2^3 * 3^1
