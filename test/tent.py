@@ -1,88 +1,26 @@
-import sys
-from collections import defaultdict
-from operator import itemgetter
-import pypyjit
-pypyjit.set_param('max_unroll_recursion=-1')
-
-sys.setrecursionlimit(10 ** 7)
-read = sys.stdin.readline
+import random
 
 
-class Mo:
-    def __init__( self, ls ):
-        from math import sqrt, ceil
-        self.ls = ls
-        self.n = len(ls)
-        self.b = ceil(sqrt(self.n))  # bukectのサイズ及び個数
-
-    def _init_states( self ):
-        ########################################
-        # self.states = None  # その時点における状態(自分で定義しろ) #2つでもいい
-        self.cnt = defaultdict(lambda: 0)
-        ########################################
-
-        # [l,r)の半開区間で考える
-        self.l = 0
-        self.r = 0
-
-        # queryを格納する用
-        self.bucket = [list() for _ in range((self.b + 1))]
-
-    def _add( self, i ):
-        # i番目の要素を含めて考えるときへstatesを更新
-        self.cnt[self.ls[i]] += 1
-
-    def _delete( self, i ):
-        # i番目の要素を削除して考えるときへstatesを更新
-        self.cnt[self.ls[i]] -= 1
-
-    def _one_process( self, l, r ):
-        # クエリ[l,r)に対してstatesを更新する
-        for i in range(self.r, r):  # rまで伸長
-            self._add(i)
-        for i in range(self.r - 1, r - 1, -1):  # rまで短縮
-            self._delete(i)
-        for i in range(self.l, l):  # lまで短縮
-            self._delete(i)
-        for i in range(self.l - 1, l - 1, -1):  # lまで伸長
-            self._add(i)
-
-        self.l = l
-        self.r = r
-
-    def process( self, queries, d ):
-        self._init_states()
-
-        for i, (l, r) in enumerate(queries):  # queryをbucketに格納
-            self.bucket[l // self.b].append((l, r, i))
-
-        for i in range(len(self.bucket)):
-            self.bucket[i].sort(key=itemgetter(1))
-
-        ret = [-1] * len(queries)
-        for b in self.bucket:
-            for l, r, i in b:  # クエリに答えていく
-                self._one_process(l, r)
-                ########################################
-                # クエリに答える作業をここで書く
-                ret[i] = self.cnt[d[l, r, i]]
-                ########################################
-        return ret
+def eval():
+    res = 0
+    return res
 
 
-def ints(): return list(map(int, read().split()))
+def playout():
+    return
 
 
-N = int(input())
-C = ints()
-Q = int(input())
-queries = []
-dct = {}
-for _ in range(Q):
-    l, r, x = ints()
-    queries.append((l - 1, r))
-    dct[(l - 1, r, _)] = x
+def monte( pos, d ):
+    if d == DEPTH:
+        return
 
-mo = Mo(C)
-ans = mo.process(queries, dct)
-print(*ans, sep='\n')
+
+DEPTH = 2
+METHODS = 4
+LIMIT = 10
+data = dict()
+data[0] = {"parent": 1, "total": 2, "visited": 3}
+monte(0, 0)
+print(data[0]["parent"])
+while data[0]["visited"] < LIMIT:
+    break
