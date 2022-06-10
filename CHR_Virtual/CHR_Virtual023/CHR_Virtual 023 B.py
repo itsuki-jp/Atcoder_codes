@@ -9,5 +9,3 @@ for i in lst:
         continue
     ans += i * (i - 1) // 2
 print(ans)
-
-
