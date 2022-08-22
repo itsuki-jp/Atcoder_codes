@@ -1,21 +1,27 @@
-mod = 998244353
+from itertools import accumulate
+
+v_max = int(input())
 n = int(input())
-lst = [2, 3, 3, 3, 3, 3, 3, 3, 2]
-if n == 2:
-    exit(print(25))
-# 1179ms
-for i in range(n - 2):
-    n_lst = [0 for _ in range(9)]
-    n_lst[0] = lst[0] + lst[1]
-    n_lst[1] = sum(lst[:3])
-    n_lst[2] = sum(lst[1:4])
-    n_lst[3] = sum(lst[2:5])
-    n_lst[4] = sum(lst[3:6])
-    n_lst[5] = sum(lst[4:7])
-    n_lst[6] = sum(lst[5:8])
-    n_lst[7] = sum(lst[6:9])
-    n_lst[8] = lst[7] + lst[8]
-    lst = [n_lst[_] % mod for _ in range(9)]
-print(sum(lst) % mod)
+amount = [0 for _ in range(12 * 60)]
+cnt = [0 for _ in range(12 * 60)]
+for _ in range(n):
+    tv = list(map(int, input().split()))
+    t = tv[0]
+    v = tv[1:]
+    for i in range(12):
+        amount[min(60 * i + t, 719)] += v[i]
+        amount[min(60 * (i + 1) + t, 719)] -= v[i]
+        t1 = min(60 * i + t, 719)
+        t2 = min(60 * (i + 1) + t, 719)
+        cnt[t1] += 1
+        cnt[t2] -= 1
+amount = list(accumulate(amount))
+cnt = list(accumulate(cnt))
 
-
+for i in range(12 * 60):
+    if cnt[i] == 0:
+        continue
+    if v_max < amount[i]:
+        print(i)
+        exit()
+print("No need!")
